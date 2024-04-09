@@ -4,12 +4,9 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sulimann.cleanarch.core.constants.TableName;
-import com.sulimann.cleanarch.domain.entities.IUsuario;
-import com.sulimann.cleanarch.domain.enums.TipoUsuario;
+import com.sulimann.cleanarch.domain.entities.IAutor;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,9 +14,9 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 
 @Entity
-@Table(name = TableName.USUARIO)
+@Table(name = TableName.AUTOR)
 @Getter
-public class UsuarioEntity implements IUsuario{
+public class AutorEntity implements IAutor{
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +24,7 @@ public class UsuarioEntity implements IUsuario{
 
   private String nome;
   private String email;
-  private String documento;
-
-  @Enumerated(EnumType.STRING)
-  private TipoUsuario tipo;
+  private String descricao;
 
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
   private LocalDateTime dataCriacao;
@@ -40,14 +34,13 @@ public class UsuarioEntity implements IUsuario{
   * Não utilizar! Criado por obrigação do hibernate
   */
   @Deprecated
-  public UsuarioEntity(){
+  public AutorEntity(){
   }
 
-  public UsuarioEntity(String nome, String email, String documento, TipoUsuario tipo, LocalDateTime dataCriacao) {
+  public AutorEntity(String nome, String email, String descricao, LocalDateTime dataCriacao) {
     this.nome = nome;
     this.email = email;
-    this.documento = documento;
-    this.tipo = tipo;
+    this.descricao = descricao;
     this.dataCriacao = dataCriacao;
   }
 
