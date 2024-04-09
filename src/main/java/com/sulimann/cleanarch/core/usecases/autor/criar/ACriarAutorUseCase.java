@@ -7,7 +7,7 @@ public abstract class ACriarAutorUseCase<T extends IAutor> {
   private final ICriarAutorMapper<T> mapper;
   private final ICriarAutorRepository<T> repository;
 
-  public ACriarAutorUseCase(ICriarAutorMapper<T> mapper, ICriarAutorRepository<T> repository) {
+  protected ACriarAutorUseCase(ICriarAutorMapper<T> mapper, ICriarAutorRepository<T> repository) {
     this.mapper = mapper;
     this.repository = repository;
   }
