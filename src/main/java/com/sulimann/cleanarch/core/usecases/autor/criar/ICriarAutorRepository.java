@@ -1,7 +1,9 @@
 package com.sulimann.cleanarch.core.usecases.autor.criar;
 
-public interface ICriarAutorRepository<T> {
+import com.sulimann.cleanarch.domain.entities.IAutor;
 
-  T salvar(T entity);
+public interface ICriarAutorRepository<AutorEntity extends IAutor> {
+
+  AutorEntity salvar(AutorEntity entity);
 
 }

@@ -1,7 +1,9 @@
 package com.sulimann.cleanarch.core.usecases.categoria.criar;
 
-public interface ICriarCategoriaRespository<T> {
+import com.sulimann.cleanarch.domain.entities.ICategoria;
 
-  T salvar(T entity);
+public interface ICriarCategoriaRespository<CategoriaEntity extends ICategoria> {
+
+  CategoriaEntity salvar(CategoriaEntity entity);
 
 }

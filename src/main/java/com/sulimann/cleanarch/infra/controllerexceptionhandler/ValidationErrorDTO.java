@@ -4,7 +4,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ValidationErrorDTO extends CustomErrorDTO{
+import com.sulimann.cleanarch.core.utils.httpresponse.ErroResponse;
+
+public class ValidationErrorDTO extends ErroResponse{
 
     List<FieldMessageDTO> errors = new ArrayList<>();
 

@@ -1,4 +1,4 @@
-package com.sulimann.cleanarch.infra.controllerexceptionhandler;
+package com.sulimann.cleanarch.core.utils.httpresponse;
 
 import java.time.LocalDateTime;
 
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class CustomErrorDTO {
+public class ErroResponse {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime timestamp;

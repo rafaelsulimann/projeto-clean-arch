@@ -1,8 +1,10 @@
 package com.sulimann.cleanarch.core.usecases.autor.criar;
 
-public interface ICriarAutorMapper<T> {
+import com.sulimann.cleanarch.domain.entities.IAutor;
 
-  T toEntity(ICriarAutorRequest request);
-  ICriarAutorResponse toResponse(T entity);
+public interface ICriarAutorMapper<AutorEntity extends IAutor> {
+
+  AutorEntity toEntity(ICriarAutorRequest request);
+  ICriarAutorResponse toResponse(AutorEntity entity);
 
 }

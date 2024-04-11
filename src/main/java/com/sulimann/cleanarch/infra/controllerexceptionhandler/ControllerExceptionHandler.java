@@ -16,19 +16,20 @@ import org.springframework.web.client.ResourceAccessException;
 
 import com.sulimann.cleanarch.core.constants.ErrorMessage;
 import com.sulimann.cleanarch.core.exceptions.ResourceNotFoundException;
+import com.sulimann.cleanarch.core.utils.httpresponse.ErroResponse;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<CustomErrorDTO> resourceNotFound(ResourceNotFoundException e, HttpServletRequest request){
+    public ResponseEntity<ErroResponse> resourceNotFound(ResourceNotFoundException e, HttpServletRequest request){
         HttpStatus status = HttpStatus.NOT_FOUND;
-        CustomErrorDTO error = new CustomErrorDTO(LocalDateTime.now(), status.value(), e.getMessage(), request.getRequestURI());
+        ErroResponse error = new ErroResponse(LocalDateTime.now(), status.value(), e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(error);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<CustomErrorDTO> methodArgumentNotValid(MethodArgumentNotValidException e, HttpServletRequest request){
+    public ResponseEntity<ErroResponse> methodArgumentNotValid(MethodArgumentNotValidException e, HttpServletRequest request){
         HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
         ValidationErrorDTO error = new ValidationErrorDTO(LocalDateTime.now(), status.value(), "Dados inválidos", request.getRequestURI());
         for(FieldError f : e.getBindingResult().getFieldErrors()){
@@ -38,24 +39,24 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<CustomErrorDTO> handleIllegalArgumentException(IllegalArgumentException e, HttpServletRequest request){
+    public ResponseEntity<ErroResponse> handleIllegalArgumentException(IllegalArgumentException e, HttpServletRequest request){
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-        CustomErrorDTO error = new CustomErrorDTO(LocalDateTime.now(), status.value(), ErrorMessage.ERRO_INTERNO, request.getRequestURI());
+        ErroResponse error = new ErroResponse(LocalDateTime.now(), status.value(), ErrorMessage.ERRO_INTERNO, request.getRequestURI());
         e.printStackTrace();
         return ResponseEntity.status(status).body(error);
     }
 
     @ExceptionHandler(HttpStatusCodeException.class)
-    public ResponseEntity<CustomErrorDTO> handleHttpStatusCodeException(HttpStatusCodeException e, HttpServletRequest request) {
+    public ResponseEntity<ErroResponse> handleHttpStatusCodeException(HttpStatusCodeException e, HttpServletRequest request) {
         HttpStatusCode status = e.getStatusCode();
-        CustomErrorDTO error = new CustomErrorDTO(LocalDateTime.now(), status.value(), e.getResponseBodyAsString(), request.getRequestURI());
+        ErroResponse error = new ErroResponse(LocalDateTime.now(), status.value(), e.getResponseBodyAsString(), request.getRequestURI());
         return ResponseEntity.status(status).body(error);
     }
 
     @ExceptionHandler(ResourceAccessException.class)
-    public ResponseEntity<CustomErrorDTO> handleResourceAccessException(ResourceAccessException e, HttpServletRequest request) {
+    public ResponseEntity<ErroResponse> handleResourceAccessException(ResourceAccessException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.SERVICE_UNAVAILABLE;
-        CustomErrorDTO error = new CustomErrorDTO(LocalDateTime.now(), status.value(), "Serviço indisponível: " + e.getMessage(), request.getRequestURI());
+        ErroResponse error = new ErroResponse(LocalDateTime.now(), status.value(), "Serviço indisponível: " + e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(error);
     }
 

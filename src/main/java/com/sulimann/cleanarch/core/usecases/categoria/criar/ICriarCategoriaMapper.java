@@ -1,8 +1,10 @@
 package com.sulimann.cleanarch.core.usecases.categoria.criar;
 
-public interface ICriarCategoriaMapper<T> {
+import com.sulimann.cleanarch.domain.entities.ICategoria;
 
-  T toEntity(ICriarCategoriaRequest request);
-  ICriarCategoriaResponse toResponse(T entity);
+public interface ICriarCategoriaMapper<CategoriaEntity extends ICategoria> {
+
+  CategoriaEntity toEntity(ICriarCategoriaRequest request);
+  ICriarCategoriaResponse toResponse(CategoriaEntity entity);
 
 }
