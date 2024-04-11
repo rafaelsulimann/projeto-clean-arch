@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sulimann.cleanarch.core.constants.Path;
 import com.sulimann.cleanarch.core.usecases.categoria.criar.ICriarCategoriaResponse;
 
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
@@ -24,7 +23,6 @@ public class CriarCategoriaController {
   }
 
   @PostMapping
-  @Transactional
   public ResponseEntity<ICriarCategoriaResponse> criarCategoria(@RequestBody @Valid CriarCategoriaRequest request){
     return ResponseEntity.status(HttpStatus.CREATED).body(this.service.execute(request));
   }

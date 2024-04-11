@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sulimann.cleanarch.core.constants.Path;
 import com.sulimann.cleanarch.core.usecases.autor.criar.ICriarAutorResponse;
 
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
@@ -24,7 +23,6 @@ public class CriarAutorController {
   }
 
   @PostMapping
-  @Transactional
   public ResponseEntity<ICriarAutorResponse> criarUsuario(@RequestBody @Valid CriarAutorRequest request){
     return ResponseEntity.status(HttpStatus.CREATED).body(this.service.execute(request));
   }

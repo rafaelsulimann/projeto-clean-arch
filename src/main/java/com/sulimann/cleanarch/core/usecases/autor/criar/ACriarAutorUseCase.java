@@ -2,6 +2,8 @@ package com.sulimann.cleanarch.core.usecases.autor.criar;
 
 import com.sulimann.cleanarch.domain.entities.IAutor;
 
+import jakarta.transaction.Transactional;
+
 public abstract class ACriarAutorUseCase<AutorEntity extends IAutor> {
 
   private final ICriarAutorMapper<AutorEntity> mapper;
@@ -12,6 +14,7 @@ public abstract class ACriarAutorUseCase<AutorEntity extends IAutor> {
     this.repository = repository;
   }
 
+  @Transactional
   public ICriarAutorResponse execute(ICriarAutorRequest request){
     AutorEntity entity = this.mapper.toEntity(request);
     entity = this.repository.salvar(entity);

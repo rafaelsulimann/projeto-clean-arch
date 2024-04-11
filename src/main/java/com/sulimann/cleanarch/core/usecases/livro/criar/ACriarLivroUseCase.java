@@ -12,6 +12,8 @@ import com.sulimann.cleanarch.domain.entities.IAutor;
 import com.sulimann.cleanarch.domain.entities.ICategoria;
 import com.sulimann.cleanarch.domain.entities.ILivro;
 
+import jakarta.transaction.Transactional;
+
 public abstract class ACriarLivroUseCase<LivroEntity extends ILivro, CategoriaEntity extends ICategoria, AutorEntity extends IAutor> {
 
   private final ICriarLivroCategoriaRepository<CategoriaEntity> criarLivroCategoriaRepository;
@@ -19,7 +21,7 @@ public abstract class ACriarLivroUseCase<LivroEntity extends ILivro, CategoriaEn
   private final ICriarLivroRepository<LivroEntity> repository;
   private final ICriarLivroMapper<LivroEntity, CategoriaEntity, AutorEntity> mapper;
 
-  public ACriarLivroUseCase(ICriarLivroCategoriaRepository<CategoriaEntity> criarLivroCategoriaRepository,
+  protected ACriarLivroUseCase(ICriarLivroCategoriaRepository<CategoriaEntity> criarLivroCategoriaRepository,
       ICriarLivroAutorRepository<AutorEntity> criarLivroAutorRepository, ICriarLivroRepository<LivroEntity> repository,
       ICriarLivroMapper<LivroEntity, CategoriaEntity, AutorEntity> mapper) {
     this.criarLivroCategoriaRepository = criarLivroCategoriaRepository;
@@ -28,6 +30,7 @@ public abstract class ACriarLivroUseCase<LivroEntity extends ILivro, CategoriaEn
     this.mapper = mapper;
   }
 
+  @Transactional
   public Resultado<ICriarLivroResponse, ErroResponse> execute(ICriarLivroRequest request){
     Optional<CategoriaEntity> opCategoria = this.criarLivroCategoriaRepository.findById(request.getCategoria());
     if(!opCategoria.isPresent()){

@@ -29,13 +29,11 @@ public class CriarLivroMapper implements ICriarLivroMapper<LivroEntity, Categori
             .dataPublicacao(livro.getDataPublicacao())
             .categoria(CriarLivroCategoriaResponse.builder()
               .id(livro.getCategoria().getId())
-              .nome(livro.getCategoria().getNome())
-              .build()
+              .nome(livro.getCategoria().getNome()).build()
             )
             .autor(CriarLivroAutorResponse.builder()
               .id(livro.getAutor().getId())
-              .nome(livro.getAutor().getNome())
-              .build()
+              .nome(livro.getAutor().getNome()).build()
             )
             .build();
   }

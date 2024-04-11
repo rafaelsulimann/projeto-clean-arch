@@ -12,7 +12,6 @@ import com.sulimann.cleanarch.core.usecases.livro.criar.ICriarLivroResponse;
 import com.sulimann.cleanarch.core.utils.httpresponse.ErroResponse;
 import com.sulimann.cleanarch.core.utils.httpresponse.Resultado;
 
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
@@ -26,7 +25,6 @@ public class CriarLivroController {
   }
 
   @PostMapping
-  @Transactional
   public ResponseEntity<Object> criarLivro(@RequestBody @Valid CriarLivroRequest request){
     Resultado<ICriarLivroResponse, ErroResponse> resultado = this.service.execute(request);
     return resultado.isErro()
