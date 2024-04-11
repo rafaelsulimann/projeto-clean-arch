@@ -1,4 +1,4 @@
-package com.sulimann.cleanarch.domain.entities;
+package com.sulimann.cleanarch.core.domain.entities;
 
 import java.time.LocalDateTime;
 

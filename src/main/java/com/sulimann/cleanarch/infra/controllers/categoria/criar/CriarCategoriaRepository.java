@@ -20,4 +20,9 @@ public class CriarCategoriaRepository implements ICriarCategoriaRespository<Cate
     return this.repository.save(entity);
   }
 
+  @Override
+  public boolean existsByNome(String nome) {
+    return this.repository.existsByNome(nome);
+  }
+
 }

@@ -1,6 +1,6 @@
 package com.sulimann.cleanarch.core.usecases.autor.criar;
 
-import com.sulimann.cleanarch.domain.entities.IAutor;
+import com.sulimann.cleanarch.core.domain.entities.IAutor;
 
 public interface ICriarAutorMapper<AutorEntity extends IAutor> {
 

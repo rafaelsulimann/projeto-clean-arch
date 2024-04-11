@@ -6,4 +6,6 @@ import com.sulimann.cleanarch.infra.entities.AutorEntity;
 
 public interface AutorRepository extends JpaRepository<AutorEntity, Long>{
 
+  boolean existsByEmail(String email);
+
 }

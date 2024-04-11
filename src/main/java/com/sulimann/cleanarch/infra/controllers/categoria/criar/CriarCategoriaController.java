@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sulimann.cleanarch.core.constants.Path;
 import com.sulimann.cleanarch.core.usecases.categoria.criar.ICriarCategoriaResponse;
+import com.sulimann.cleanarch.core.utils.httpresponse.ErroResponse;
+import com.sulimann.cleanarch.core.utils.httpresponse.Resultado;
 
 import jakarta.validation.Valid;
 
@@ -23,8 +25,11 @@ public class CriarCategoriaController {
   }
 
   @PostMapping
-  public ResponseEntity<ICriarCategoriaResponse> criarCategoria(@RequestBody @Valid CriarCategoriaRequest request){
-    return ResponseEntity.status(HttpStatus.CREATED).body(this.service.execute(request));
+  public ResponseEntity<Object> criarCategoria(@RequestBody @Valid CriarCategoriaRequest request){
+    Resultado<ICriarCategoriaResponse, ErroResponse> resultado = this.service.execute(request);
+    return resultado.isErro()
+            ? ResponseEntity.status(resultado.getErro().getStatus()).body(resultado.getErro())
+            : ResponseEntity.status(HttpStatus.CREATED).body(resultado.getSucesso());
   }
 
 }

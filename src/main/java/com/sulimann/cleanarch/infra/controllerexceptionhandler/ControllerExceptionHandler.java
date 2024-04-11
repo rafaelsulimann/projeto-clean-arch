@@ -2,8 +2,6 @@ package com.sulimann.cleanarch.infra.controllerexceptionhandler;
 
 import java.time.LocalDateTime;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -15,18 +13,12 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.ResourceAccessException;
 
 import com.sulimann.cleanarch.core.constants.ErrorMessage;
-import com.sulimann.cleanarch.core.exceptions.ResourceNotFoundException;
 import com.sulimann.cleanarch.core.utils.httpresponse.ErroResponse;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {
-
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ErroResponse> resourceNotFound(ResourceNotFoundException e, HttpServletRequest request){
-        HttpStatus status = HttpStatus.NOT_FOUND;
-        ErroResponse error = new ErroResponse(LocalDateTime.now(), status.value(), e.getMessage(), request.getRequestURI());
-        return ResponseEntity.status(status).body(error);
-    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErroResponse> methodArgumentNotValid(MethodArgumentNotValidException e, HttpServletRequest request){

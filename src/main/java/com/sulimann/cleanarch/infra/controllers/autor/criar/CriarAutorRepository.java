@@ -20,4 +20,9 @@ public class CriarAutorRepository implements ICriarAutorRepository<AutorEntity>{
     return this.repository.save(entity);
   }
 
+  @Override
+  public boolean existsByEmail(String email) {
+    return this.repository.existsByEmail(email);
+  }
+
 }

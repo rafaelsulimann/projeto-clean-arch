@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sulimann.cleanarch.core.constants.Path;
 import com.sulimann.cleanarch.core.usecases.autor.criar.ICriarAutorResponse;
+import com.sulimann.cleanarch.core.utils.httpresponse.ErroResponse;
+import com.sulimann.cleanarch.core.utils.httpresponse.Resultado;
 
 import jakarta.validation.Valid;
 
@@ -23,8 +25,11 @@ public class CriarAutorController {
   }
 
   @PostMapping
-  public ResponseEntity<ICriarAutorResponse> criarUsuario(@RequestBody @Valid CriarAutorRequest request){
-    return ResponseEntity.status(HttpStatus.CREATED).body(this.service.execute(request));
+  public ResponseEntity<Object> criarUsuario(@RequestBody @Valid CriarAutorRequest request){
+    Resultado<ICriarAutorResponse, ErroResponse> resultado = this.service.execute(request);
+    return resultado.isErro()
+            ? ResponseEntity.status(resultado.getErro().getStatus()).body(resultado.getErro())
+            : ResponseEntity.status(HttpStatus.CREATED).body(resultado.getSucesso());
   }
 
 }

@@ -1,6 +1,6 @@
 package com.sulimann.cleanarch.core.usecases.livro.criar;
 
-import com.sulimann.cleanarch.domain.entities.ILivro;
+import com.sulimann.cleanarch.core.domain.entities.ILivro;
 
 public interface ICriarLivroRepository<LivroEntity extends ILivro> {
 

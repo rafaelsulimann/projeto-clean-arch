@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sulimann.cleanarch.core.constants.TableName;
-import com.sulimann.cleanarch.domain.entities.IAutor;
+import com.sulimann.cleanarch.core.domain.entities.IAutor;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -8,6 +8,8 @@ public final class ErrorMessage {
     public static final String PAGINA_MINIMA_100 = "O livro deve ter no mínimo 100 páginas";
     public static final String PUBLICACAO_NO_FUTURO = "A data de publicação do livro deve ser no futuro";
     public static final String RESUMO_MAXIMO_500 = "O resumo do livro deve contêr no máximo 500 caracteres";
+    public static final String EMAIL_INVALIDO = "Email inválido";
+    public static final String DESCRICAO_MAXIMA_400 = "A descrição deve contêr no máximo 400 caracteres";
 
     // DEFAULT ERRO 500
     public static final String ERRO_INTERNO = "Erro interno. Operação não realizada!";
@@ -19,6 +21,8 @@ public final class ErrorMessage {
     //RECURSOS DUPLICADO
     public static final String TITULO_DUPLICADO = "Título já existente";
     public static final String ISBN_DUPLICADO = "Isbn já existente";
+    public static final String EMAIL_DUPLICADO = "Email já existente";
+    public static final String NOME_DUPLICADO = "Nome já existente";
 
     private ErrorMessage() {
         throw new AssertionError("Não é permitido instanciar esta classe.");

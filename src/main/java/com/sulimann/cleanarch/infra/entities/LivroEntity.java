@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import com.sulimann.cleanarch.core.constants.TableName;
-import com.sulimann.cleanarch.domain.entities.ILivro;
+import com.sulimann.cleanarch.core.domain.entities.ILivro;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

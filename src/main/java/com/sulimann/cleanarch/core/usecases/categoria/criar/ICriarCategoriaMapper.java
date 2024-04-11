@@ -1,6 +1,6 @@
 package com.sulimann.cleanarch.core.usecases.categoria.criar;
 
-import com.sulimann.cleanarch.domain.entities.ICategoria;
+import com.sulimann.cleanarch.core.domain.entities.ICategoria;
 
 public interface ICriarCategoriaMapper<CategoriaEntity extends ICategoria> {
 

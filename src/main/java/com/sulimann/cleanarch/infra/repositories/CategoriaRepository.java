@@ -6,4 +6,6 @@ import com.sulimann.cleanarch.infra.entities.CategoriaEntity;
 
 public interface CategoriaRepository extends JpaRepository<CategoriaEntity, Long>{
 
+  boolean existsByNome(String nome);
+
 }

@@ -1,7 +1,7 @@
 package com.sulimann.cleanarch.infra.entities;
 
 import com.sulimann.cleanarch.core.constants.TableName;
-import com.sulimann.cleanarch.domain.entities.ICategoria;
+import com.sulimann.cleanarch.core.domain.entities.ICategoria;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

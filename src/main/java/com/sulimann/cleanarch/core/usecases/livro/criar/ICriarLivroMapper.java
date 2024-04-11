@@ -1,8 +1,8 @@
 package com.sulimann.cleanarch.core.usecases.livro.criar;
 
-import com.sulimann.cleanarch.domain.entities.IAutor;
-import com.sulimann.cleanarch.domain.entities.ICategoria;
-import com.sulimann.cleanarch.domain.entities.ILivro;
+import com.sulimann.cleanarch.core.domain.entities.IAutor;
+import com.sulimann.cleanarch.core.domain.entities.ICategoria;
+import com.sulimann.cleanarch.core.domain.entities.ILivro;
 
 public interface ICriarLivroMapper<LivroEntity extends ILivro, CategoriaEntity extends ICategoria, AutorEntity extends IAutor> {
 
