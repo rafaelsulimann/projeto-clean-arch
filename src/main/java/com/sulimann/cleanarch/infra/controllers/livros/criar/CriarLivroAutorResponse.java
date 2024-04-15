@@ -1,4 +1,4 @@
-package com.sulimann.cleanarch.infra.controllers.livros;
+package com.sulimann.cleanarch.infra.controllers.livros.criar;
 
 import com.sulimann.cleanarch.core.usecases.livro.criar.ICriarLivroAutorResponse;
 

@@ -1,4 +1,4 @@
-package com.sulimann.cleanarch.infra.controllers.livros;
+package com.sulimann.cleanarch.infra.controllers.livros.criar;
 
 import org.springframework.stereotype.Component;
 

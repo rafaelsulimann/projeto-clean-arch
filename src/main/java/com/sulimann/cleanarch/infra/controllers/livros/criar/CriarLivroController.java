@@ -1,4 +1,4 @@
-package com.sulimann.cleanarch.infra.controllers.livros;
+package com.sulimann.cleanarch.infra.controllers.livros.criar;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

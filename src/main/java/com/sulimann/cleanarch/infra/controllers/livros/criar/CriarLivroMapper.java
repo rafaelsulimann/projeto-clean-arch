@@ -1,4 +1,4 @@
-package com.sulimann.cleanarch.infra.controllers.livros;
+package com.sulimann.cleanarch.infra.controllers.livros.criar;
 
 import org.springframework.stereotype.Component;
 
@@ -21,6 +21,7 @@ public class CriarLivroMapper implements ICriarLivroMapper<LivroEntity, Categori
   public ICriarLivroResponse toResponse(LivroEntity livro) {
     return CriarLivroResponse.builder()
             .id(livro.getId())
+            .titulo(livro.getTitulo())
             .resumo(livro.getResumo())
             .sumario(livro.getSumario())
             .preco(livro.getPreco())

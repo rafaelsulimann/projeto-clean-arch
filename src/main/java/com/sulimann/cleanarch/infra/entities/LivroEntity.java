@@ -23,6 +23,7 @@ public class LivroEntity implements ILivro{
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
   private String titulo;
   private String resumo;
   private String sumario;
