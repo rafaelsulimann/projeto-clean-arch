@@ -20,10 +20,10 @@ public class ListarLivrosMapper implements IListarLivrosMapper<LivroEntity> {
         .numeroPaginas(livro.getNumeroPaginas())
         .isbn(livro.getIsbn())
         .dataPublicacao(livro.getDataPublicacao())
-        .categoria(ListarLivroCategoriaResponse.builder()
+        .categoria(ListarLivrosCategoriaResponse.builder()
             .id(livro.getCategoria().getId())
             .nome(livro.getCategoria().getNome()).build())
-        .autor(ListarLivroAutorResponse.builder()
+        .autor(ListarLivrosAutorResponse.builder()
             .id(livro.getAutor().getId())
             .nome(livro.getAutor().getNome()).build())
         .build();

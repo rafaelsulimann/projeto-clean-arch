@@ -20,7 +20,7 @@ public class ListarLivrosResponse implements IListarLivrosResponse{
   private Integer numeroPaginas;
   private Long isbn;
   private LocalDate dataPublicacao;
-  private ListarLivroCategoriaResponse categoria;
-  private ListarLivroAutorResponse autor;
+  private ListarLivrosCategoriaResponse categoria;
+  private ListarLivrosAutorResponse autor;
 
 }

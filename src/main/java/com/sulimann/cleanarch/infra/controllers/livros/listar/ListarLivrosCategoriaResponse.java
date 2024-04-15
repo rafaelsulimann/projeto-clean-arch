@@ -1,13 +1,13 @@
 package com.sulimann.cleanarch.infra.controllers.livros.listar;
 
-import com.sulimann.cleanarch.core.usecases.livro.listar.IListarLivroCategoriaResponse;
+import com.sulimann.cleanarch.core.usecases.livro.listar.IListarLivrosCategoriaResponse;
 
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
-public class ListarLivroCategoriaResponse implements IListarLivroCategoriaResponse{
+public class ListarLivrosCategoriaResponse implements IListarLivrosCategoriaResponse{
 
   private Long id;
   private String nome;

@@ -1,6 +1,6 @@
 package com.sulimann.cleanarch.core.usecases.livro.listar;
 
-public interface IListarLivroAutorResponse {
+public interface IListarLivrosCategoriaResponse {
   Long getId();
   String getNome();
 }

@@ -12,6 +12,6 @@ public interface IListarLivrosResponse {
   Integer getNumeroPaginas();
   Long getIsbn();
   LocalDate getDataPublicacao();
-  IListarLivroCategoriaResponse getCategoria();
-  IListarLivroAutorResponse getAutor();
+  IListarLivrosCategoriaResponse getCategoria();
+  IListarLivrosAutorResponse getAutor();
 }
