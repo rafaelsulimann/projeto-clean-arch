@@ -17,6 +17,7 @@ public final class ErrorMessage {
     //RECURSOS NÃO ENCONTRADOS
     public static final String CATEGORIA_NAO_ENCONTRADA = "Categoria não encontrada";
     public static final String AUTOR_NAO_ENCONTRADO = "Autor não encontrado";
+    public static final String LIVRO_NAO_ENCONTRADO = "Livro não encontrado";
 
     //RECURSOS DUPLICADO
     public static final String TITULO_DUPLICADO = "Título já existente";
