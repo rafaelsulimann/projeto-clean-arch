@@ -32,7 +32,7 @@ public class PageableSpringAdapter implements Pageable{
 
   @Override
   public Sort getSort() {
-    return new SortSpringAdapter(this.pageable.getSort().getOrder().stream().map(iorder -> new Order(Direction.valueOf(iorder.getDirection().name()), iorder.getProperty())).toList());
+    return new SortSpringAdapter(this.pageable.getSort().getOrders().stream().map(iorder -> new Order(Direction.valueOf(iorder.getDirection().name()), iorder.getProperty())).toList());
   }
 
   @Override
