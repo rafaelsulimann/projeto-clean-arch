@@ -16,7 +16,7 @@ public class AObterLivroByIdUseCase<LivroEntity extends ILivro>{
   private final IObterLivroByIdRepository<LivroEntity> repository;
   private final IObterLivroByIdMapper<LivroEntity> mapper;
 
-  public AObterLivroByIdUseCase(IObterLivroByIdRepository<LivroEntity> repository, IObterLivroByIdMapper<LivroEntity> mapper) {
+  protected AObterLivroByIdUseCase(IObterLivroByIdRepository<LivroEntity> repository, IObterLivroByIdMapper<LivroEntity> mapper) {
     this.repository = repository;
     this.mapper = mapper;
   }

@@ -29,8 +29,7 @@ public class PaisEntity implements IPais{
   public PaisEntity(){
   }
 
-  public PaisEntity(Long id, String nome) {
-    this.id = id;
+  public PaisEntity(String nome) {
     this.nome = nome;
   }
 
