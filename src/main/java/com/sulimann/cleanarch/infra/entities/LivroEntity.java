@@ -40,6 +40,11 @@ public class LivroEntity implements ILivro{
   @JoinColumn(name = "autor_id")
   private AutorEntity autor;
 
+  /**
+  * @deprecated
+  * Não utilizar! Criado por obrigação do hibernate
+  */
+  @Deprecated
   public LivroEntity(){
   }
 
