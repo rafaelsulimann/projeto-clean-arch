@@ -13,6 +13,7 @@ import com.sulimann.cleanarch.core.constants.Path;
 import com.sulimann.cleanarch.core.usecases.livro.listar.IListarLivrosResponse;
 import com.sulimann.cleanarch.core.utils.page.IPage;
 import com.sulimann.cleanarch.infra.adapters.paginacao.PageableAdapter;
+import com.sulimann.cleanarch.infra.adapters.specification.SpecificationAdapter;
 
 @RestController
 @RequestMapping(value = Path.LIVRO)
@@ -26,7 +27,7 @@ public class ListarLivrosController {
 
   @GetMapping
   public ResponseEntity<IPage<IListarLivrosResponse>> listarLivros(ListarLivrosSpec spec, @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
-    return ResponseEntity.status(HttpStatus.OK).body(this.service.execute(spec, new PageableAdapter(pageable)));
+    return ResponseEntity.status(HttpStatus.OK).body(this.service.execute(new SpecificationAdapter<>(spec), new PageableAdapter(pageable)));
   }
 
 

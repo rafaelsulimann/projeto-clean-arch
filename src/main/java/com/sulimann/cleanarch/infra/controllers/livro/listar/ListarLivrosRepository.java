@@ -8,6 +8,7 @@ import com.sulimann.cleanarch.core.utils.page.IPageable;
 import com.sulimann.cleanarch.core.utils.specification.ISpecification;
 import com.sulimann.cleanarch.infra.adapters.paginacao.PageAdapter;
 import com.sulimann.cleanarch.infra.adapters.paginacao.PageableSpringAdapter;
+import com.sulimann.cleanarch.infra.adapters.specification.SpecificationSpringAdapter;
 import com.sulimann.cleanarch.infra.entities.LivroEntity;
 import com.sulimann.cleanarch.infra.repositories.LivroRepository;
 
@@ -22,7 +23,7 @@ public class ListarLivrosRepository implements IListarLivrosRepository<LivroEnti
 
   @Override
   public IPage<LivroEntity> listar(ISpecification<LivroEntity> spec, IPageable pageable) {
-    return new PageAdapter<>(this.repository.findAll(spec, new PageableSpringAdapter(pageable)));
+    return new PageAdapter<>(this.repository.findAll(new SpecificationSpringAdapter<>(spec), new PageableSpringAdapter(pageable)));
   }
 
 }

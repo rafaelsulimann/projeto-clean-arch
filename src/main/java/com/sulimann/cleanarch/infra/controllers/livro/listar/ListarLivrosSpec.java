@@ -1,6 +1,7 @@
 package com.sulimann.cleanarch.infra.controllers.livro.listar;
 
-import com.sulimann.cleanarch.core.utils.specification.ISpecification;
+import org.springframework.data.jpa.domain.Specification;
+
 import com.sulimann.cleanarch.infra.entities.LivroEntity;
 
 import net.kaczmarzyk.spring.data.jpa.domain.Equal;
@@ -14,4 +15,4 @@ import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
   @Spec(path = "isbn", spec = Equal.class),
   @Spec(path = "dataPublicacao", spec = Equal.class),
 })
-public interface ListarLivrosSpec extends ISpecification<LivroEntity>{}
+public interface ListarLivrosSpec extends Specification<LivroEntity>{}
