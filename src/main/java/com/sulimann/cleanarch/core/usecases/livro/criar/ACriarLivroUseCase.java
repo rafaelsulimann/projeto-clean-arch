@@ -2,6 +2,7 @@ package com.sulimann.cleanarch.core.usecases.livro.criar;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Map;
 import java.util.Optional;
 
 import com.sulimann.cleanarch.core.constants.ErrorMessage;
@@ -12,6 +13,7 @@ import com.sulimann.cleanarch.core.domain.entities.ICategoria;
 import com.sulimann.cleanarch.core.domain.entities.ILivro;
 import com.sulimann.cleanarch.core.utils.httpresponse.ErroResponse;
 import com.sulimann.cleanarch.core.utils.httpresponse.Resultado;
+import com.sulimann.cleanarch.core.utils.validation.FluentValidation;
 
 import jakarta.transaction.Transactional;
 
@@ -33,27 +35,49 @@ public abstract class ACriarLivroUseCase<LivroEntity extends ILivro, CategoriaEn
 
   @Transactional
   public Resultado<ICriarLivroResponse, ErroResponse> execute(ICriarLivroRequest request){
-    Optional<CategoriaEntity> opCategoria = this.criarLivroCategoriaRepository.findById(request.getCategoria());
-    if(!opCategoria.isPresent()){
-      return Resultado.erro(new ErroResponse(LocalDateTime.now(ZoneId.of("UTC")), HttpStatus.NOT_FOUND, ErrorMessage.CATEGORIA_NAO_ENCONTRADA, Path.LIVRO));
-    }
+    return FluentValidation.of(request)
+            .ifNotPresent("categoria", getCategoria(request.getCategoria())).thenReturn(this::erroCategoriaNaoEncontrada)
+            .ifNotPresent("autor", getAutor(request.getAutor())).thenReturn(this::erroAutorNaoEncontrado)
+            .ifIsTrue(tituloJaExistente(request.getTitulo())).thenReturn(this::erroTituloJaExistente)
+            .ifIsTrue(isbnJaExistente(request.getIsbn())).thenReturn(this::erroIsbnJaExistente)
+            .finallyExecute(this::criarLivro);
+  }
 
-    Optional<AutorEntity> opAutor = this.criarLivroAutorRepository.findById(request.getAutor());
-    if(!opAutor.isPresent()){
-      return Resultado.erro(new ErroResponse(LocalDateTime.now(ZoneId.of("UTC")), HttpStatus.NOT_FOUND, ErrorMessage.AUTOR_NAO_ENCONTRADO, Path.LIVRO));
-    }
+  private Resultado<ICriarLivroResponse, ErroResponse> erroIsbnJaExistente() {
+    return Resultado.erro(new ErroResponse(LocalDateTime.now(ZoneId.of("UTC")), HttpStatus.UNPROCESSABLE_ENTITY, ErrorMessage.ISBN_DUPLICADO, Path.LIVRO));
+  }
 
-    boolean jaExisteLivroComMesmoTitulo = this.repository.existsByTitulo(request.getTitulo());
-    if(jaExisteLivroComMesmoTitulo){
-      return Resultado.erro(new ErroResponse(LocalDateTime.now(ZoneId.of("UTC")), HttpStatus.UNPROCESSABLE_ENTITY, ErrorMessage.TITULO_DUPLICADO, Path.LIVRO));
-    }
+  private boolean isbnJaExistente(Long isbn) {
+    return this.repository.existsByIsbn(isbn);
+  }
 
-    boolean jaExisteLivroComMesmoIsbn = this.repository.existsByIsbn(request.getIsbn());
-    if(jaExisteLivroComMesmoIsbn){
-      return Resultado.erro(new ErroResponse(LocalDateTime.now(ZoneId.of("UTC")), HttpStatus.UNPROCESSABLE_ENTITY, ErrorMessage.ISBN_DUPLICADO, Path.LIVRO));
-    }
+  private Resultado<ICriarLivroResponse, ErroResponse> erroTituloJaExistente() {
+    return Resultado.erro(new ErroResponse(LocalDateTime.now(ZoneId.of("UTC")), HttpStatus.UNPROCESSABLE_ENTITY, ErrorMessage.TITULO_DUPLICADO, Path.LIVRO));
+  }
 
-    LivroEntity livro = this.mapper.toEntity(request, opCategoria.get(), opAutor.get());
+  private boolean tituloJaExistente(String titulo) {
+    return this.repository.existsByTitulo(titulo);
+  }
+
+  private Resultado<ICriarLivroResponse, ErroResponse> erroAutorNaoEncontrado() {
+    return Resultado.erro(new ErroResponse(LocalDateTime.now(ZoneId.of("UTC")), HttpStatus.NOT_FOUND, ErrorMessage.AUTOR_NAO_ENCONTRADO, Path.LIVRO));
+  }
+
+  private Optional<AutorEntity> getAutor(Long autorId) {
+    return this.criarLivroAutorRepository.findById(autorId);
+  }
+
+  private Resultado<ICriarLivroResponse, ErroResponse> erroCategoriaNaoEncontrada() {
+    return Resultado.erro(new ErroResponse(LocalDateTime.now(ZoneId.of("UTC")), HttpStatus.NOT_FOUND, ErrorMessage.CATEGORIA_NAO_ENCONTRADA, Path.LIVRO));
+  }
+
+  private Optional<CategoriaEntity> getCategoria(Long categoriaId) {
+    return this.criarLivroCategoriaRepository.findById(categoriaId);
+  }
+
+  @SuppressWarnings("unchecked")
+  private Resultado<ICriarLivroResponse, ErroResponse> criarLivro(ICriarLivroRequest request ,Map<String, Object> entities) {
+    LivroEntity livro = this.mapper.toEntity(request, (CategoriaEntity) entities.get("categoria"), (AutorEntity) entities.get("autor"));
     livro = this.repository.salvar(livro);
     return Resultado.sucesso(this.mapper.toResponse(livro));
   }

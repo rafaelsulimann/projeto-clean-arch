@@ -18,12 +18,16 @@ public final class ErrorMessage {
     public static final String CATEGORIA_NAO_ENCONTRADA = "Categoria não encontrada";
     public static final String AUTOR_NAO_ENCONTRADO = "Autor não encontrado";
     public static final String LIVRO_NAO_ENCONTRADO = "Livro não encontrado";
+    public static final String PAIS_NAO_ENCONTRADO = "País não encontrado";
 
     //RECURSOS DUPLICADO
     public static final String TITULO_DUPLICADO = "Título já existente";
     public static final String ISBN_DUPLICADO = "Isbn já existente";
     public static final String EMAIL_DUPLICADO = "Email já existente";
     public static final String NOME_DUPLICADO = "Nome já existente";
+    public static final String CATEGORIA_DUPLICADA = "Categoria já existente";
+    public static final String ESTADO_DUPLICADO = "Estado já existente";
+    public static final String PAIS_DUPLICADO = "País já existente";
 
     private ErrorMessage() {
         throw new AssertionError("Não é permitido instanciar esta classe.");

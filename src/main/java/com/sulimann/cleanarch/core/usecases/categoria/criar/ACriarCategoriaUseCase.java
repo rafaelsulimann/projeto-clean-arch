@@ -9,6 +9,7 @@ import com.sulimann.cleanarch.core.constants.Path;
 import com.sulimann.cleanarch.core.domain.entities.ICategoria;
 import com.sulimann.cleanarch.core.utils.httpresponse.ErroResponse;
 import com.sulimann.cleanarch.core.utils.httpresponse.Resultado;
+import com.sulimann.cleanarch.core.utils.validation.FluentValidation;
 
 import jakarta.transaction.Transactional;
 
@@ -24,11 +25,20 @@ public abstract class ACriarCategoriaUseCase<CategoriaEntity extends ICategoria>
 
   @Transactional
   public Resultado<ICriarCategoriaResponse, ErroResponse> execute(ICriarCategoriaRequest request){
-    boolean jaExisteCategoriaComMesmoNome = this.repository.existsByNome(request.getNome());
-    if(jaExisteCategoriaComMesmoNome) {
-      return Resultado.erro(new ErroResponse(LocalDateTime.now(ZoneId.of("UTC")), HttpStatus.UNPROCESSABLE_ENTITY, ErrorMessage.NOME_DUPLICADO, Path.CATEGORIA));
-    }
+    return FluentValidation.of(request)
+            .ifIsTrue(categoriaJaExistente(request.getNome())).thenReturn(this::erroCategoriaJaExistente)
+            .finallyExecute(this::criarCategoria);
+  }
 
+  private boolean categoriaJaExistente(String nome) {
+    return this.repository.existsByNome(nome);
+  }
+
+  private Resultado<ICriarCategoriaResponse, ErroResponse> erroCategoriaJaExistente(){
+    return Resultado.erro(new ErroResponse(LocalDateTime.now(ZoneId.of("UTC")), HttpStatus.UNPROCESSABLE_ENTITY, ErrorMessage.CATEGORIA_DUPLICADA, Path.CATEGORIA));
+  }
+
+  private Resultado<ICriarCategoriaResponse, ErroResponse> criarCategoria(ICriarCategoriaRequest request){
     CategoriaEntity entity = this.mapper.toEntity(request);
     entity = this.repository.salvar(entity);
     return Resultado.sucesso(this.mapper.toResponse(entity));

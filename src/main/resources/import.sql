@@ -20,3 +20,8 @@ INSERT INTO tb_livros(titulo, resumo, sumario, preco, numero_paginas, isbn, data
 INSERT INTO tb_livros(titulo, resumo, sumario, preco, numero_paginas, isbn, data_publicacao, categoria_id, autor_id) VALUES ('TOP DMS6', 'EU SOU O MELHOR', 'TESTE6', 650.0, 230, 123412341, TIMESTAMP WITH TIME ZONE '2024-04-16T13:00:00Z', 4, 4)
 INSERT INTO tb_livros(titulo, resumo, sumario, preco, numero_paginas, isbn, data_publicacao, categoria_id, autor_id) VALUES ('TOP DMS7', 'EU SOU O MELHOR', 'TESTE7', 760.0, 470, 234524354, TIMESTAMP WITH TIME ZONE '2024-04-16T13:00:00Z', 2, 5)
 INSERT INTO tb_livros(titulo, resumo, sumario, preco, numero_paginas, isbn, data_publicacao, categoria_id, autor_id) VALUES ('TOP DMS8', 'EU SOU O MELHOR', 'TESTE8', 870.0, 570, 654654654, TIMESTAMP WITH TIME ZONE '2024-04-16T13:00:00Z', 2, 6)
+
+INSERT INTO tb_paises(nome) VALUES ('RIO GRANDE DO SUL')
+INSERT INTO tb_paises(nome) VALUES ('SANTA CATARINA')
+INSERT INTO tb_paises(nome) VALUES ('SAO PAULO')
+INSERT INTO tb_paises(nome) VALUES ('RIO DE JANEIRO')
